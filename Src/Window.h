@@ -50,6 +50,7 @@ private:
 		EVENT PROCESSING
 	*/
 		void checkWindowResize();
+		double lastCursorX, lastCursorY;
 
 public:
 	/*
@@ -84,7 +85,18 @@ public:
 		bool Xpressed() { return glfwGetKey(windowHandle, GLFW_KEY_X) == GLFW_PRESS; }
 		bool Leftpressed() { return glfwGetKey(windowHandle, GLFW_KEY_LEFT) == GLFW_PRESS; }
 		bool Rightpressed() { return glfwGetKey(windowHandle, GLFW_KEY_RIGHT) == GLFW_PRESS; }
-
+		std::vector<double> CursorChange() {
+			double prevX = lastCursorX;
+			double prevY = lastCursorY;
+			glfwGetCursorPos(windowHandle, &lastCursorX, &lastCursorY);
+			glfwSetCursorPos(windowHandle, windowWidth / 2, lastCursorY);
+			if (prevX >= 0 && prevX <= windowWidth && prevY >= 0 && prevY <= windowHeight) {
+				return { lastCursorX - prevX, lastCursorY - prevY };
+			}
+			else {
+				return { 0, 0 };
+			}
+		}
 
 	/*
 		Getters
