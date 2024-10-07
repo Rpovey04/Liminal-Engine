@@ -92,7 +92,8 @@ void DrawCubes(Window* w, float rotX, float rotZ, std::vector<float> CameraPos, 
 			center.x = (Tcube[k].Verticies[q][2].Pos.x + Tcube[k].Verticies[q][0].Pos.x) / 2.0f;
 			center.y = (Tcube[k].Verticies[q][2].Pos.y + Tcube[k].Verticies[q][0].Pos.y) / 2.0f;
 			center.z = (Tcube[k].Verticies[q][2].Pos.z + Tcube[k].Verticies[q][0].Pos.z) / 2.0f;
-			Tcube[k].Verticies[q][0].layer = center.x * 0 + center.y * 0 + center.z * 1.0f;
+			// Tcube[k].Verticies[q][0].layer = center.x * 0 + center.y * 0 + center.z * 1.0f;
+			Tcube[k].Verticies[q][0].layer = -sqrt(pow((center.x-CameraPos[0]), 2) + pow((center.y-CameraPos[1]), 2) + pow((center.z-CameraPos[2]), 2));
 		}
 	}
 
